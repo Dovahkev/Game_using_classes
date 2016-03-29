@@ -18,6 +18,8 @@ void setup()
   playerW = 50;
   blockW = 100;
   blockY = 100;
+  blockX = width - blockW;
+  blockY = height - blockH;
   
 }
 
@@ -27,6 +29,6 @@ void draw()
   
   for(int i = 0; i < 9; i++)
   {
-  rect(
+  rect(blockX * i, blockY * i, blockW, blockH);
   }
 }
