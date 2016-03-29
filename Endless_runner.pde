@@ -2,11 +2,14 @@ float playerX;
 float playerY;
 float playerH;
 float playerW;
-float blockX;
+
 float blockY;
 float blockW;
 float blockH;
 
+float move = 1;
+
+float [] x = new float[9];
 
 
 void setup()
@@ -17,18 +20,22 @@ void setup()
   playerH = 50;
   playerW = 50;
   blockW = 100;
-  blockY = 100;
-  blockX = width - blockW;
-  blockY = height - blockH;
-  
+  blockH = 100;
+  blockY = height-blockH;
 }
 
 void draw()
 {
+  frameCount = 30;
+   background(0);
+  
   rect(playerX,playerY,playerW,playerH);
   
-  for(int i = 0; i < 9; i++)
-  {
-  rect(blockX * i, blockY * i, blockW, blockH);
+  for(int i = 0; i < x.length; i++)
+  {  
+    x[i] = 100 * i;
+    rect(x[i],blockY,blockW,blockH);
+           
   }
+ 
 }
