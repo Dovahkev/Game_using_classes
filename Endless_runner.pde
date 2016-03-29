@@ -3,25 +3,40 @@ float playerY;
 float playerH;
 float playerW;
 
+float blockX;
 float blockY;
 float blockW;
 float blockH;
 
-float move = 1;
+float obsX;
+float obsY;
+float obsW;
+float obsH;
 
-float [] x = new float[9];
+float gravity = 1;
+
+float speed = 1;
+
+float [] x = new float[20];
 
 
 void setup()
 {
   size(900,500);
-  playerX = width * 0.5f;
+  playerX = width * 0.25f;
   playerY = height * 0.5f;
   playerH = 50;
   playerW = 50;
-  blockW = 100;
+  
+  blockW = width;
   blockH = 100;
-  blockY = height-blockH;
+  blockX = 0;
+  blockY = height- blockH;
+ 
+  obsX = width;
+  obsY = height - blockH * 2f;
+  obsW = 100;
+  obsH = 100; 
 }
 
 void draw()
@@ -31,11 +46,34 @@ void draw()
   
   rect(playerX,playerY,playerW,playerH);
   
-  for(int i = 0; i < x.length; i++)
-  {  
-    x[i] = 100 * i;
-    rect(x[i],blockY,blockW,blockH);
-           
-  }
+  rect(blockX,blockY,blockW,blockH);
  
+   player();
+   obstacle();
+}
+
+void player()
+{
+  if (keyPressed)
+  {
+    if (keyCode == UP && playerY + playerH > blockY - playerH / 4)
+    {
+      
+      playerY-=200;
+      gravity = 0;
+ 
+    }
+  }
+  
+  if(playerY + playerH <= blockY)
+      {
+        playerY += gravity;
+        gravity += 0.3f;
+      }
+}
+
+void obstacle()
+{
+  rect(obsX,obsY,obsW,obsH);
+  obsX-=8;
 }
