@@ -19,10 +19,11 @@ float coinW;
 float coinH;
 
 
-float pSpeed = 10;
+float pSpeed = 5;
 
-float speed = 8;
-float blockS = 10;
+float speed = 5;
+float blockS = 5;
+float gravity = 3;
 
 PImage[] floor = new PImage[10];
 float [] xx = new float [10];
@@ -33,7 +34,7 @@ void setup()
   size(900,500);
   playerX = width * 0.25f;
   playerY = height * 0.5f;
-  playerH = 50;
+  playerH = 100;
   playerW = 50;
   
   blockW = 100;
@@ -105,23 +106,27 @@ void ground()
 void player()
 { 
     rect(playerX,playerY,playerW,playerH);
- 
-    if (keys[' '])
+    
+    if (playerY + playerH <= height - blockH*0.5f)
     {
-      playerY -= pSpeed;
+      playerY += gravity;
+    }
+ 
+    if (keys[' '] && playerY >= 0)
+    {
+      playerY -= pSpeed * 2f;
     }
     
-    if (keys[RIGHT])
+    if (keys[RIGHT] && playerX + playerW <= width)
     {
       playerX+= pSpeed;
     }
     
-     if (keys[LEFT])
+     if (keys[LEFT] && playerX >= 0)
     {
       playerX-= pSpeed;
     }
-      
-   playerY += 3f;
+         
   }
 
 
