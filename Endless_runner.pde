@@ -13,9 +13,14 @@ float obsY;
 float obsW;
 float obsH;
 
-float gravity = 1;
+float coinX;
+float coinY;
+float coinW;
+float coinH;
 
-float speed = 1;
+float pSpeed = 10;
+
+float speed = 8;
 
 float [] x = new float[20];
 
@@ -34,46 +39,73 @@ void setup()
   blockY = height- blockH;
  
   obsX = width;
-  obsY = height - blockH * 2f;
-  obsW = 100;
-  obsH = 100; 
+  obsY = height - 150;
+  obsW = 50;
+  obsH = 50; 
+  
+  coinW = 20;
+  coinH = 20;
+  coinX = width;
+  coinY = height * 0.5f;
 }
+
+boolean[] keys = new boolean[2000];
+
+
+void keyPressed()
+{
+  keys[keyCode] = true;
+}
+
+void keyReleased()
+{
+  keys[keyCode] = false;
+}
+
 
 void draw()
 {
   frameCount = 30;
-   background(0);
+  
+  background(0);
   
   rect(playerX,playerY,playerW,playerH);
   
   rect(blockX,blockY,blockW,blockH);
+  rect(blockX,blockY,blockW, blockH * 0.5f);
  
    player();
    obstacle();
+   coin();
 }
 
 void player()
 {
+ 
   if (keyPressed)
   {
-    if (keyCode == UP && playerY + playerH > blockY - playerH / 4)
+    if (key == ' ')
     {
-      
-      playerY-=200;
-      gravity = 0;
- 
+      playerY -= pSpeed;
+    }
+    
+    if (key == 'd')
+    {
+      playerX+= pSpeed;
     }
   }
   
-  if(playerY + playerH <= blockY)
-      {
-        playerY += gravity;
-        gravity += 0.3f;
-      }
+  playerY += 3f;
 }
 
 void obstacle()
 {
   rect(obsX,obsY,obsW,obsH);
-  obsX-=8;
+  obsX-=speed;
+}
+
+void coin()
+{
+  ellipse(coinX,coinY,coinW,coinH);
+  coinX -= speed;
 }
