@@ -18,11 +18,14 @@ float coinY;
 float coinW;
 float coinH;
 
+
 float pSpeed = 10;
 
 float speed = 8;
+float blockS = 10;
 
-float [] x = new float[20];
+PImage[] floor = new PImage[10];
+float [] xx = new float [10];
 
 
 void setup()
@@ -33,9 +36,9 @@ void setup()
   playerH = 50;
   playerW = 50;
   
-  blockW = width;
+  blockW = 100;
   blockH = 100;
-  blockX = 0;
+  blockX = 100;
   blockY = height- blockH;
  
   obsX = width;
@@ -47,6 +50,12 @@ void setup()
   coinH = 20;
   coinX = width;
   coinY = height * 0.5f;
+  
+  for (int i = 0; i < 10; i++)
+  {
+    floor[i] = loadImage("floor.png");
+    xx[i] = blockW * i;
+  }
 }
 
 boolean[] keys = new boolean[2000];
@@ -69,34 +78,53 @@ void draw()
   
   background(0);
   
-  rect(playerX,playerY,playerW,playerH);
-  
-  rect(blockX,blockY,blockW,blockH);
-  rect(blockX,blockY,blockW, blockH * 0.5f);
- 
+   ground();
    player();
+
    obstacle();
    coin();
+   
 }
 
-void player()
+void ground()
 {
- 
-  if (keyPressed)
+   for (int i = 0; i < xx.length; i++)
   {
-    if (key == ' ')
+    image(floor[i],xx[i],blockY);
+    xx[i]-= blockS;
+    
+    if (xx[i] + blockW <= 0)
+    {
+      xx[i] = width;
+    }
+  }
+}
+
+
+
+void player()
+{ 
+    rect(playerX,playerY,playerW,playerH);
+ 
+    if (keys[' '])
     {
       playerY -= pSpeed;
     }
     
-    if (key == 'd')
+    if (keys[RIGHT])
     {
       playerX+= pSpeed;
     }
+    
+     if (keys[LEFT])
+    {
+      playerX-= pSpeed;
+    }
+      
+   playerY += 3f;
   }
-  
-  playerY += 3f;
-}
+
+
 
 void obstacle()
 {
