@@ -1,7 +1,3 @@
-float playerX;
-float playerY;
-float playerH;
-float playerW;
 
 float blockX;
 float blockY;
@@ -28,14 +24,13 @@ float gravity = 3;
 PImage[] floor = new PImage[10];
 float [] xx = new float [10];
 
-
 void setup()
 {
+  
   size(900,500);
-  playerX = width * 0.25f;
-  playerY = height * 0.5f;
-  playerH = 100;
-  playerW = 50;
+
+  ship = new Ship(250,250); 
+  gameObjects.add(Ship);
   
   blockW = 100;
   blockH = 100;
@@ -99,37 +94,9 @@ void ground()
       xx[i] = width;
     }
   }
+  
+  
 }
-
-
-
-void player()
-{ 
-    rect(playerX,playerY,playerW,playerH);
-    
-    if (playerY + playerH <= height - blockH*0.5f)
-    {
-      playerY += gravity;
-    }
- 
-    if (keys[' '] && playerY >= 0)
-    {
-      playerY -= pSpeed * 2f;
-    }
-    
-    if (keys[RIGHT] && playerX + playerW <= width)
-    {
-      playerX+= pSpeed;
-    }
-    
-     if (keys[LEFT] && playerX >= 0)
-    {
-      playerX-= pSpeed;
-    }
-         
-  }
-
-
 
 void obstacle()
 {
