@@ -1,58 +1,37 @@
 
-float blockX;
-float blockY;
-float blockW;
-float blockH;
-
-float obsX;
-float obsY;
-float obsW;
-float obsH;
-
-float coinX;
-float coinY;
-float coinW;
-float coinH;
-
-
-float pSpeed = 5;
-
-float speed = 5;
-float blockS = 5;
-float gravity = 3;
-
 PImage[] floor = new PImage[10];
 float [] xx = new float [10];
 
+float blockW, blockH, blockX, blockY, blockS;
+float grav = 3;
+
+int score;
+int level;
+int maxCoin = 50;
+
+
+
+  Player player1 = new Player(250, 250, 5,50,100);
+  Coin coin1 = new Coin(900, 250, 20f,20f);
+
+
+
 void setup()
 {
-  
-  size(900,500);
-
-  ship = new Ship(250,250); 
-  gameObjects.add(Ship);
-  
-  blockW = 100;
-  blockH = 100;
-  blockX = 100;
-  blockY = height- blockH;
+ size(900,500);
  
-  obsX = width;
-  obsY = height - 150;
-  obsW = 50;
-  obsH = 50; 
-  
-  coinW = 20;
-  coinH = 20;
-  coinX = width;
-  coinY = height * 0.5f;
-  
+ blockW = 100;
+ blockH = blockW;
+ blockY = height - blockW;
+ blockS = 5;
+ 
   for (int i = 0; i < 10; i++)
   {
     floor[i] = loadImage("floor.png");
     xx[i] = blockW * i;
   }
 }
+
 
 boolean[] keys = new boolean[2000];
 
@@ -67,19 +46,16 @@ void keyReleased()
   keys[keyCode] = false;
 }
 
-
 void draw()
 {
-  frameCount = 30;
   
   background(0);
   
-   ground();
-   player();
+  ground();
+  
+  player1.update();
+  coin1.update();
 
-   obstacle();
-   coin();
-   
 }
 
 void ground()
@@ -94,18 +70,5 @@ void ground()
       xx[i] = width;
     }
   }
-  
-  
 }
 
-void obstacle()
-{
-  rect(obsX,obsY,obsW,obsH);
-  obsX-=speed;
-}
-
-void coin()
-{
-  ellipse(coinX,coinY,coinW,coinH);
-  coinX -= speed;
-}

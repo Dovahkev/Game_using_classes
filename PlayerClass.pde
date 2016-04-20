@@ -1,39 +1,40 @@
-class Player extends GameObject
+class Player
 {
-  
-  Player(float playerX, float playerY )
-  {
-    super(250,250,50,100);
-  }
-  
-  
-  void update()
-  {
-    if (playerY + playerH <= height - blockH*0.5f)
+  float x, y, s, w, h;
+
+  Player(float posX, float posY, float pSpeed, float pWidth, float pHeight)
     {
-      playerY += gravity;
-    }
- 
-    if (keys[' '] && playerY >= 0)
-    {
-      playerY -= pSpeed * 2f;
+      x = posX;
+      y = posY;
+      s = pSpeed;
+      w = pWidth;
+      h = pHeight;
     }
     
-    if (keys[RIGHT] && playerX + playerW <= width)
+    void update()
     {
-      playerX+= pSpeed;
+      
+    if(y + h <= height - blockH * 0.5f)
+    {
+      y += grav;
+    }
+      
+    if (keys[' '] && y >= 0)
+    {
+      y -= s * 2f;
     }
     
-     if (keys[LEFT] && playerX >= 0)
+    if (keys[RIGHT] && x + w <= width)
     {
-      playerX-= pSpeed;
+      x+= s;
     }
-         
-  }
-  
-  void render()
-  {
+    
+     if (keys[LEFT] && x >= 0)
+    {
+      x-= s;
+    }
+    
     rect(x,y,w,h);
-  }
-  
+    
+    }
 }
