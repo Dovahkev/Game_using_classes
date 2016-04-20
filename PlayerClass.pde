@@ -13,6 +13,8 @@ class Player
     
     void update()
     {
+      noStroke();
+      fill(0,0,255);
       
     if(y + h <= height - blockH * 0.5f)
     {

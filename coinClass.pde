@@ -12,7 +12,11 @@ class Coin
   
   void update()
   {
+    noStroke();
     ellipse(x,y,w,h);
+    fill(255,255,0);
+    
+    x-= 5;
     
     
     

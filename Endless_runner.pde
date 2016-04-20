@@ -1,20 +1,17 @@
-
-PImage[] floor = new PImage[10];
-float [] xx = new float [10];
+ 
+PImage  [] floor = new PImage[10];
+float  [] xx = new float [10];
 
 float blockW, blockH, blockX, blockY, blockS;
 float grav = 3;
-
+ 
 int score;
 int level;
 int maxCoin = 50;
+ 
+Player player1 = new Player(250, 250, 5,50,100);
 
-
-
-  Player player1 = new Player(250, 250, 5,50,100);
-  Coin coin1 = new Coin(900, 250, 20f,20f);
-
-
+Coin[] coins = new Coin[100];
 
 void setup()
 {
@@ -29,6 +26,11 @@ void setup()
   {
     floor[i] = loadImage("floor.png");
     xx[i] = blockW * i;
+  }
+  
+  for (int i = 0; i < 100; i ++)
+  {
+    coins[i] = new Coin(width + 25 * i, i * i, 20,20 );
   }
 }
 
@@ -54,7 +56,11 @@ void draw()
   ground();
   
   player1.update();
-  coin1.update();
+  
+  for(int i = 0; i < 100; i++)
+  {
+    coins[i].update();
+  }
 
 }
 
