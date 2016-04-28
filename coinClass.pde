@@ -18,8 +18,6 @@ class Coin
     
     x-= 5;
     
-    
-    
   }
   
 }

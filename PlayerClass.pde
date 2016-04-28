@@ -21,7 +21,7 @@ class Player
       y += grav;
     }
       
-    if (keys[' '] && y >= 0)
+    if (keys[UP] && y >= 0)
     {
       y -= s * 2f;
     }
