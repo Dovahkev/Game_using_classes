@@ -36,7 +36,10 @@ class Player
       x-= s;
     }
     
-    rect(x,y,w,h);
+    fill(0,0,0,50);
+    ellipse(x + 15,450,w/2,h/4);
+    image(playerSPR,x,y);
+
     
     }
 }
